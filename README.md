@@ -26,7 +26,7 @@ Clone this repository:
 bash
 Copy
 Edit
-git clone https://github.com/your-username/dsa-questions.git
+git clone https://github.com/rydhmm/Dsa-using-java
 cd dsa-questions
 Pick a topic and start solving the problems!
 Refer to the solutions and explanations when needed.
