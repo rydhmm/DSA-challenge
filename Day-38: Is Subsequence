@@ -1,0 +1,14 @@
+class Solution {
+    public boolean isSubsequence(String s, String t) {
+        int i = 0, j = 0; // i for s, j for t
+        
+        while (i < s.length() && j < t.length()) {
+            if (s.charAt(i) == t.charAt(j)) {
+                i++;  // Move i only if characters match
+            }
+            j++;  // Always move j
+        }
+        
+        return i == s.length();  // If i reaches the end, s is a subsequence
+    }
+}
