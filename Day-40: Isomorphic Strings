@@ -1,0 +1,25 @@
+import java.util.HashMap;
+
+class Solution {
+    public boolean isIsomorphic(String s, String t) {
+        if (s.length() != t.length()) return false; // If lengths are different, return false
+        
+        HashMap<Character, Character> mapST = new HashMap<>(); // Maps chars from s -> t
+        HashMap<Character, Character> mapTS = new HashMap<>(); // Maps chars from t -> s
+        
+        for (int i = 0; i < s.length(); i++) {
+            char fromS = s.charAt(i);
+            char fromT = t.charAt(i);
+            
+            // Check if mappings exist and are consistent
+            if (mapST.containsKey(fromS) && mapST.get(fromS) != fromT) return false;
+            if (mapTS.containsKey(fromT) && mapTS.get(fromT) != fromS) return false;
+            
+            // Create new mappings
+            mapST.put(fromS, fromT);
+            mapTS.put(fromT, fromS);
+        }
+        
+        return true;
+    }
+}
