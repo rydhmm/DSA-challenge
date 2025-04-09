@@ -1,0 +1,24 @@
+import java.util.*;
+
+public class Solution {
+    public int[] intersect(int[] nums1, int[] nums2) {
+        Map<Integer, Integer> countMap = new HashMap<>();
+        List<Integer> resultList = new ArrayList<>();
+
+        // Count occurrences of elements in nums1
+        for (int num : nums1) {
+            countMap.put(num, countMap.getOrDefault(num, 0) + 1);
+        }
+
+        // Find the intersection elements in nums2
+        for (int num : nums2) {
+            if (countMap.getOrDefault(num, 0) > 0) {
+                resultList.add(num);
+                countMap.put(num, countMap.get(num) - 1);  // Decrease count
+            }
+        }
+
+        // Convert list to array
+        return resultList.stream().mapToInt(i -> i).toArray();
+    }
+}
