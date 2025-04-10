@@ -1,0 +1,30 @@
+class Solution {
+    public boolean isValid(int[] quantities, int n, int maxAllowed) {
+        int storeCount = 0;
+        for (int q : quantities) {
+            storeCount += (q + maxAllowed - 1) / maxAllowed; // Equivalent to ceil(q / maxAllowed)
+            if (storeCount > n) return false;
+        }
+        return true;
+    }
+
+    public int minimizedMaximum(int n, int[] quantities) {
+        int maxProduct = 0;
+        for (int q : quantities) {
+            maxProduct = Math.max(maxProduct, q);
+        }
+
+        int left = 1, right = maxProduct, ans = maxProduct;
+        
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (isValid(quantities, n, mid)) {
+                ans = mid;  // Minimize further
+                right = mid - 1;
+            } else {
+                left = mid + 1;
+            }
+        }
+        return ans;
+    }
+}
