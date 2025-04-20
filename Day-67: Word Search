@@ -1,0 +1,45 @@
+class Solution {
+    public boolean exist(char[][] board, String word) {
+        int m = board.length;
+        int n = board[0].length;
+        
+        for (int r = 0; r < m; r++) {
+            for (int c = 0; c < n; c++) {
+                if (dfs(board, r, c, word, 0)) {
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    public boolean dfs(char[][] board, int r, int c, String word, int wordIndex) {
+        // base case: word is found
+        if (wordIndex == word.length()) {
+            return true;
+        }
+
+        int rows = board.length;
+        int cols = board[0].length;
+
+        // boundary and mismatch check
+        if (r < 0 || c < 0 || r >= rows || c >= cols || board[r][c] != word.charAt(wordIndex)) {
+            return false;
+        }
+
+        // mark the current cell as visited
+        char temp = board[r][c];
+        board[r][c] = ' ';
+
+        // explore all four directions
+        boolean found = dfs(board, r - 1, c, word, wordIndex + 1) ||
+                        dfs(board, r + 1, c, word, wordIndex + 1) ||
+                        dfs(board, r, c - 1, word, wordIndex + 1) ||
+                        dfs(board, r, c + 1, word, wordIndex + 1);
+
+        // backtrack (restore the original character)
+        board[r][c] = temp;
+
+        return found;
+    }
+}
